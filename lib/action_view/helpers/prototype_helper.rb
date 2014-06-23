@@ -327,10 +327,10 @@ module ActionView
           #   # Generates: Element.insert("list", { bottom: "<li>Last item</li>" });
           #   page.insert_html :bottom, 'list', '<li>Last item</li>'
           #
-          def insert_html(position, id, *options_for_render)
-            content = javascript_object_for(render(*options_for_render))
-            record "Element.insert(\"#{id}\", { #{position.to_s.downcase}: #{content} });"
-          end
+          # def insert_html(position, id, *options_for_render)
+          #   content = javascript_object_for(render(*options_for_render))
+          #   record "Element.insert(\"#{id}\", { #{position.to_s.downcase}: #{content} });"
+          # end
 
           # Replaces the inner HTML of the DOM element with the given +id+.
           #
@@ -342,9 +342,9 @@ module ActionView
           #   # Generates:  Element.update("person-45", "-- Contents of 'person' partial --");
           #   page.replace_html 'person-45', :partial => 'person', :object => @person
           #
-          def replace_html(id, *options_for_render)
-            call 'Element.update', id, render(*options_for_render)
-          end
+          # def replace_html(id, *options_for_render)
+          #   call 'Element.update', id, render(*options_for_render)
+          # end
 
           # Replaces the "outer HTML" (i.e., the entire element, not just its
           # contents) of the DOM element with the given +id+.
@@ -376,9 +376,9 @@ module ActionView
           #   # Generates: Element.replace("person_45", "-- Contents of partial --");
           #   page.replace 'person_45', :partial => 'person', :object => @person
           #
-          def replace(id, *options_for_render)
-            call 'Element.replace', id, render(*options_for_render)
-          end
+          # def replace(id, *options_for_render)
+          #   call 'Element.replace', id, render(*options_for_render)
+          # end
 
           # Removes the DOM elements with the given +ids+ from the page.
           #
@@ -388,9 +388,9 @@ module ActionView
           #  # Generates: ["person_23", "person_9", "person_2"].each(Element.remove);
           #  page.remove 'person_23', 'person_9', 'person_2'
           #
-          def remove(*ids)
-            loop_on_multiple_args 'Element.remove', ids
-          end
+          # def remove(*ids)
+          #   loop_on_multiple_args 'Element.remove', ids
+          # end
 
           # Shows hidden DOM elements with the given +ids+.
           #
@@ -400,9 +400,9 @@ module ActionView
           #  # Generates: ["person_6", "person_13", "person_223"].each(Element.show);
           #  page.show 'person_6', 'person_13', 'person_223'
           #
-          def show(*ids)
-            loop_on_multiple_args 'Element.show', ids
-          end
+          # def show(*ids)
+          #   loop_on_multiple_args 'Element.show', ids
+          # end
 
           # Hides the visible DOM elements with the given +ids+.
           #
@@ -412,9 +412,9 @@ module ActionView
           #  # Generates: ["person_29", "person_9", "person_0"].each(Element.hide);
           #  page.hide 'person_29', 'person_9', 'person_0'
           #
-          def hide(*ids)
-            loop_on_multiple_args 'Element.hide', ids
-          end
+          # def hide(*ids)
+          #   loop_on_multiple_args 'Element.hide', ids
+          # end
 
           # Toggles the visibility of the DOM elements with the given +ids+.
           # Example:
@@ -424,9 +424,9 @@ module ActionView
           #  page.toggle 'person_14', 'person_12', 'person_23'      # Hides the elements
           #  page.toggle 'person_14', 'person_12', 'person_23'      # Shows the previously hidden elements
           #
-          def toggle(*ids)
-            loop_on_multiple_args 'Element.toggle', ids
-          end
+          # def toggle(*ids)
+          #   loop_on_multiple_args 'Element.toggle', ids
+          # end
 
           # Displays an alert dialog with the given +message+.
           #
@@ -447,10 +447,10 @@ module ActionView
           #
           #  # Generates: window.location.href = "/account/signup";
           #  page.redirect_to(:controller => 'account', :action => 'signup')
-          def redirect_to(location)
-            url = location.is_a?(String) ? location : @context.url_for(location)
-            record "window.location.href = #{url.inspect}"
-          end
+          # def redirect_to(location)
+          #   url = location.is_a?(String) ? location : @context.url_for(location)
+          #   record "window.location.href = #{url.inspect}"
+          # end
 
           # Reloads the browser's current +location+ using JavaScript
           #
@@ -727,13 +727,13 @@ module ActionView
         assign(variable, value)
       end
 
-      def replace_html(*options_for_render)
-        call 'update', @generator.send(:render, *options_for_render)
-      end
+      # def replace_html(*options_for_render)
+      #   call 'update', @generator.send(:render, *options_for_render)
+      # end
 
-      def replace(*options_for_render)
-        call 'replace', @generator.send(:render, *options_for_render)
-      end
+      # def replace(*options_for_render)
+      #   call 'replace', @generator.send(:render, *options_for_render)
+      # end
 
       def reload(options_for_replace = {})
         replace(options_for_replace.merge({ :partial => @id.to_s }))
